@@ -1,5 +1,9 @@
+---
+layout: default
+---
+
 # Analisando um Binário Fictício
-<sup>[voltar](../../../index.md)</sup>
+<sup>[voltar](../../../)</sup>
 
 A análise de binários é uma prática comum em segurança da informação, engenharia reversa e depuração de software.  
 Por meio dela, é possível compreender a estrutura interna de um arquivo executável, biblioteca ou qualquer outro tipo de dado compilado.
