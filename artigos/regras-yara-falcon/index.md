@@ -1,7 +1,5 @@
 # Regras YARA no CrowdStrike Falcon (MalQuery)
 
-## Introdução
-
 Para melhor compreender a função e o funcionamento das regras YARA, vale primeiro passar por alguns conceitos fundamentais em análise de
 _malwares_.
 
