@@ -1,7 +1,3 @@
----
-date: 2025-10-13
----
-
 # Analisando um Binário Fictício
 
 A análise de binários é uma prática comum em segurança da informação, engenharia reversa e depuração de software.  
