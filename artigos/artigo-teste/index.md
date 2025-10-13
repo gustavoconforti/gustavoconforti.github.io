@@ -5,7 +5,6 @@ Por meio dela, é possível compreender a estrutura interna de um arquivo execut
 
 Neste exemplo, observaremos um pequeno binário fictício chamado `sample.bin` e faremos uma breve análise visual utilizando uma representação hexadecimal e ASCII.
 
----
 
 ## Representação Hexadecimal e ASCII
 
@@ -26,7 +25,6 @@ O formato segue o padrão:
 
 Essa forma de visualização é extremamente útil para identificar padrões, cabeçalhos e possíveis assinaturas em arquivos.
 
----
 
 ## O Cabeçalho “MZ”
 
@@ -35,7 +33,6 @@ Essas iniciais vêm de **Mark Zbikowski**, um dos engenheiros originais da Micro
 
 Embora este seja apenas um arquivo fictício, a presença do cabeçalho “MZ” indica que ele foi simulado para parecer um executável.
 
----
 
 ## Identificação de Strings
 
