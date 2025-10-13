@@ -40,7 +40,7 @@ possíveis até encontrar a correta)
 
 Mais detalhes sobre o assunto em [What is Modular Arithmetic](https://www.youtube.com/watch?v=Eg6CTCu8iio) e [How Does SHA-256 Work?](https://www.youtube.com/watch?v=f9EbD6iY9zI&list=FLQrhpNpCy_SZoEvKCJgcRZQ&index=16).
 
-É por isso então que usamos _file _hash_es_ como _IoCs_ e é também como boa parte das ferramentas de antivírus ainda criam assinaturas.
+É por isso então que usamos _file hashes_ como _IoCs_ e é também como boa parte das ferramentas de antivírus ainda criam assinaturas.
 
 Entretanto, atacantes se utilizam desses mesmos princípios das funções criptográficas para evadir sistemas de defesa que usam delas como principal
 mecanismo; se mínimas alterações no dado ingerido geram grandes discrepâncias no _message digest_ final, então a simples adição ou remoção de
@@ -56,59 +56,59 @@ _C&C_ a ser contatado, ou o comando que será executado via PowerShell, pois nes
 ser alocados em memória. Pela simples natureza do processo, esses valores sobrevivem toda a esteira de compilação do código, sendo armazenados de
 forma inalterada em um segmento específico do binário final. 
 
+> [!NOTE]
+> **Complemento: Compilação e arquivos binários**
+>
+>Um arquivo binário é o resultado final do processo de compilação de um código. Esse processo, de forma simplificada, ocorre da seguinte forma:
+>
+>1. Um arquivo fonte escrito em uma linguagem de alto nível (C++, Ruby, Java) serve como entrada na esteira de compilação.
+>
+>```
+>int print() {
+>std::cout << "Hello, World"; ← Valor hardcoded
+>return 0;
+>}
+>```
+>2. Nas fases de _preprocessing_ e _compilation_ o código escrito em alto nível é limpo, reorganizado e transformado >em um conjunto de instruções
+>Assembly que a arquitetura do processador de destino é capaz de interpretar.
+>
+>```
+>global _start
+>section .text
+>_start:
+>mov rax, 1
+>mov rdi, 1
+>mov rsi, message
+>mov rdx, 13
+>syscall
+>mov eax, 60
+>xor rdi, rdi
+>syscall
+>message:
+>db "Hello, World", 10 ← Valor hardcoded
+>```
+>3. Por fim, nas fases de _assembly_ e _linking_  o produto do passo anterior é transformado em linguagem binária pura e o arquivo final recebe _entry
+>point_ , permitindo a sua execução. Esse é o executável que analisamos.
+>
+>```
+>00000000 7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 |.ELF............|
+>00000010 01 00 3e 00 01 00 00 00 00 00 00 00 00 00 00 00 |..>.............|
+>00000020 00 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 |........@.......|
+>00000030 00 00 00 00 40 00 00 00 00 00 40 00 06 00 02 00 |....@.....@.....|
+>[...]
+>000001c0 b8 01 00 00 00 bf 01 00 00 00 48 be 00 00 00 00 |..........H.....|
+>000001d0 00 00 00 00 ba 0d 00 00 00 0f 05 b8 3c 00 00 00 |............<...|
+>000001e0 48 31 ff 0f 05 48 65 6c 6c 6f 2c 20 57 6f 72 6c |H1...Hello, Worl| ← Valor hardcoded
+>000001f0 64 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |d...............|
+>[...]
+>```
 
-Complemento: Compilação e arquivos binários
 
+Mais sobre os assuntos em [What are EXE files?](https://www.youtube.com/watch?v=hhgxsrAFyz8&t=531s), [C and C++ compilation process](https://www.youtube.com/watch?v=ksJ9bdSX5Yo&t=2348s) e [Assembly: Hello World!](https://www.youtube.com/watch?v=HgEGAaYdABA&t=12s).
 
-Um arquivo binário é o resultado final do processo de compilação de um código. Esse processo, de forma simplificada, ocorre da seguinte forma:
-
-1. Um arquivo fonte escrito em uma linguagem de alto nível (C++, Ruby, Java) serve como entrada na esteira de compilação.
-
-```
-int print() {
-std::cout << "Hello, World"; 🡐 Valor hardcoded
-return 0;
-}
-```
-2. Nas fases de _preprocessing_ e _compilation_ o código escrito em alto nível é limpo, reorganizado e transformado em um conjunto de instruções
-Assembly que a arquitetura do processador de destino é capaz de interpretar.
-
-```
-global _start
-section .text
-_start:
-mov rax, 1
-mov rdi, 1
-mov rsi, message
-mov rdx, 13
-syscall
-mov eax, 60
-xor rdi, rdi
-syscall
-message:
-db "Hello, World", 10 🡐 Valor hardcoded
-```
-3. Por fim, nas fases de _assembly_ e _linking_  o produto do passo anterior é transformado em linguagem binária pura e o arquivo final recebe _entry
-point_ , permitindo a sua execução. Esse é o executável que analisamos.
-
-```
-00000000 7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 |.ELF............|
-00000010 01 00 3e 00 01 00 00 00 00 00 00 00 00 00 00 00 |..>.............|
-00000020 00 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 |........@.......|
-00000030 00 00 00 00 40 00 00 00 00 00 40 00 06 00 02 00 |....@.....@.....|
-[...]
-000001c0 b8 01 00 00 00 bf 01 00 00 00 48 be 00 00 00 00 |..........H.....|
-000001d0 00 00 00 00 ba 0d 00 00 00 0f 05 b8 3c 00 00 00 |............<...|
-000001e0 48 31 ff 0f 05 48 65 6c 6c 6f 2c 20 57 6f 72 6c |H1...Hello, Worl| 🡐 Valor hardcoded
-000001f0 64 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |d...............|
-[...]
-```
-
-Mais sobre os assuntos em What are EXE files?, C and C++ compilation process e Assembly: Hello World!.
-
-Isso significa dizer que, por mais que o programador altere seu código a fim de burlar ferramentas defensivas baseadas em __hash_es_ , a necessidade de
+Isso significa dizer que, por mais que o programador altere seu código a fim de burlar ferramentas defensivas baseadas em _hashes_ , a necessidade de
 manter a funcionalidade do mesmo inevitavelmente gerará artefatos únicos de identificação, esses que poderemos eventualmente utilizar na
-catalogação de um determinado pedaço de _malware._ Essa coleta de informações pode ser feita manualmente através da análise estática do arquivo em
+catalogação de um determinado pedaço de _malware_. Essa coleta de informações pode ser feita manualmente através da análise estática do arquivo em
 
 
 questão (enquanto ele descansa em disco) ou da análise dinâmica do mesmo (quando ele é executado e os códigos de operação são alocados em
@@ -117,19 +117,19 @@ memória).
 Toda essa história é muito feliz e bonita... mas só até a página 2. Nela descobrimos que essas atividades demandam tempo e conhecimento em
 demasia, e no fim das contas acabam ficando quase que exclusivamente nas mãos de profissionais forenses de grandes empresas de _threat intelligence_.
 
-Por esse motivo que, em novembro 2013, Victor Alvarez, então funcionário da VirusTotal, criou...
+Por esse motivo que, em novembro 2013, [Victor Alvarez](https://github.com/plusvic), então funcionário da [VirusTotal](https://www.virustotal.com/gui/home/url), criou...
 
 # YARA
 
-YARA (Y _et Another Ridiculous Acronym_ segundo Wikipedia) provê à profissionais indepentes e à grande comunidade, de forma aberta e totalmente
+YARA (_Yet Another Ridiculous Acronym_ segundo Wikipedia) provê à profissionais indepentes e à grande comunidade, de forma aberta e totalmente
 grátis, uma ferramenta de catalogação e detecção de _malware_ baseada em regras, que analisam os padrões textuais ou binários (esses que acabamos
 de abordar) de forma altamente escalável.
 
 Uma regra YARA contém duas seções principais:
 
 
-strings : Padrões textuais ou binários a serem buscados nos arquivos
-condition : Organização lógica de busca desses padrões
+- _strings_ : Padrões textuais ou binários a serem buscados nos arquivos
+- _condition_ : Organização lógica de busca desses padrões
 
 No exemplo abaixo são declaradas as _strings_ $a, $b e $c e a  _condition_  diz que a regra disparará ao encontrar qualquer um desses padrões em um
 determinado arquivo.
