@@ -17,7 +17,7 @@ Contato
 Artigos
 ------
 
-   * [Artigo teste](artigos/artigo-teste/index.md)
+   * [Regras YARA no CrowdStrike Falcon (MalQuery)](artigos/regras-yara-falcon/index.md)
 
 Projetos
 ------
