@@ -149,10 +149,9 @@ condition:
 $a or $b or $c
 }
 ```
-Esse é realmente o fundamental a se saber, porém mais detalhes de funcionamento das regras YARA podem ser encontrados em Welcome to YARA's
-documentation!
+Esse é realmente o fundamental a se saber, porém mais detalhes de funcionamento das regras YARA podem ser encontrados em [Welcome to YARA's documentation!](https://yara.readthedocs.io/en/stable/).
 
-Existem diversas formas de utilizar essa ferramenta, como através do projeto público do GitHub ou pela implementação de uma aplicação terceira.
+Existem diversas formas de utilizar essa ferramenta, como através do [projeto público do GitHub](https://github.com/VirusTotal/yara/releases) ou pela implementação de uma [aplicação terceira](https://github.com/VirusTotal/yara#whos-using-yara).
 Podemos também usá-la em diferentes momentos do ciclo de vida de uma análise, como na resposta ao incidente, no processo de _threat hunting_ ou na
 eliminação de falsos positivos. Estarei me atendo a aplicação dessa ferramenta dentro das possibilidades do escopo da Nelogica, que é composto
 atualmente apenas pelo nosso EDR, o Crowdstrike Falcon.
@@ -160,37 +159,28 @@ atualmente apenas pelo nosso EDR, o Crowdstrike Falcon.
 # Regras YARA no Falcon
 
 Novamente, as regas YARA podem fazer parte de diversas fases de um processo de análise de _malware_. Tendo estabelecidos os conceitos abordados
-anteriormente, o consumo das informações desse vídeo é suficiente para entender a utilização das regras YARA no Falcon, através da base MalQuery.
+anteriormente, o consumo das informações [deste vídeo](https://github.com/VirusTotal/yara#whos-using-yara) é suficiente para entender a utilização das regras YARA no Falcon, através da base [MalQuery](https://falcon.us-2.crowdstrike.com/login?next=%2Fdocumentation%2F18%2Ffalcon-malquery) (requer conta CrowdStrike).
 Em suma:
 
 
-MalQuery é uma coleção gigantesca de arquivos maliciosos (na casa dos petabytes , ampliada a cada 8 horas) que vem sendo curada desde 2012 pela
+- MalQuery é uma coleção gigantesca de arquivos maliciosos (na casa dos petabytes , ampliada a cada 8 horas) que vem sendo curada desde 2012 pela
 CrowdStrike.
-O incident responder consulta esse repositórios baseado em um incidente em execução/já ocorrido no ambiente local. Ele utiliza de padrões textuais,
+- O incident responder consulta esse repositórios baseado em um incidente em execução/já ocorrido no ambiente local. Ele utiliza de padrões textuais,
 binários e/ou hexadecimais presentes nessa amostra encontrada para buscar mais informações sobre o malware em questão (se está ligado a algum
 threat actor , se faz parte de um família específica de malwares , quando foi identificado pela primeira vez, etc.).
-Com relação à regras YARA, a MalQuery funciona como uma base validadora de falsos positivos. Tendo uma regra já criada, baseada em um processo
+- Com relação à regras YARA, a MalQuery funciona como uma base validadora de falsos positivos. Tendo uma regra já criada, baseada em um processo
 preestabelecido de análise de malware (retornaremos nesse ponto na conclusão), o investigador roda tal consulta YARA contra o MalQuery, a fim de
 projetar se ela será efetiva em um cenário real. Diferente de outras ferramentas de mercado que atendem o mesmo propósito, a MalQuery conta com
 um tempo de resposta na casa dos minutos, facilitando a realização de ajustes mediante consultas subsequentes (limitando apenas o número de
 consultas mensais, limite esse acordado na aquisição da licença de uso).
 
 Contrariando a minha expectativa no início desse estudo, o Falcon não é capaz de rodar consultas YARA contra os _filesystems_ do ambiente protegido
-pelo agente. Não encontrei documentação oficial sobre essa "limitação", somente a seguinte thread do _subreddit r/crowdstrike/_.
+pelo agente. Não encontrei documentação oficial sobre essa "limitação", somente a seguinte [thread](https://www.reddit.com/r/crowdstrike/comments/k9t7rf/yara_rule_monitoring_via_cs/) do _subreddit_ [r/crowdstrike](https://www.reddit.com/r/crowdstrike/comments/lc9yb5/new_to_crowdstrike_read_this_thread_first/).
 
 
-
-Testes com o CrowdResponse serão executados (SEG-6208).
 
 # Conclusão
 
 
 A funcionalidade fornecida pelo MalQuery é avançada, apenas uma das ferramentas que compõe um processo complexo de resposta à incidentes.
-Precisamos primeiro amadurecer o nosso plano de resposta à incidentes, depois dentro dele poderemos usar da análise de malwares com regras YARA
-para gerar ações de bloqueio em larga escala.
-
-
-Um exemplo de como isso se daria na prática pode ser observado no KS - Análise de Phishing desenvolvido pelo colega Raphael Mulinari. Estarei
-levando esse tópico para discussão com o time.
-
-
+Precisamos do arroz com feijão bem feito em nossas organizações, um plano de resposta à incidentes maduro para, somente depois disso, usarmos da análise de malwares com regras YARA e gerar ações de bloqueio em larga escala.
