@@ -21,7 +21,7 @@ Contato
 Artigos
 ------
 
-   * [Artigo teste](artigos/artigo-teste.md)
+   * [Artigo teste](artigos/artigo-teste/index.md)
 
 Projetos
 ------
