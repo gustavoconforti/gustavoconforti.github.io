@@ -69,7 +69,7 @@ forma inalterada em um segmento específico do binário final. 
 >return 0;
 >}
 >```
->2. Nas fases de _preprocessing_ e _compilation_ o código escrito em alto nível é limpo, reorganizado e transformado >em um conjunto de instruções
+>2. Nas fases de _preprocessing_ e _compilation_ o código escrito em alto nível é limpo, reorganizado e transformado em um conjunto de instruções
 >Assembly que a arquitetura do processador de destino é capaz de interpretar.
 >
 >```
