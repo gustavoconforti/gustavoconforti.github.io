@@ -109,8 +109,6 @@ Mais sobre os assuntos em [What are EXE files?](https://www.youtube.com/watch?v=
 Isso significa dizer que, por mais que o programador altere seu código a fim de burlar ferramentas defensivas baseadas em _hashes_ , a necessidade de
 manter a funcionalidade do mesmo inevitavelmente gerará artefatos únicos de identificação, esses que poderemos eventualmente utilizar na
 catalogação de um determinado pedaço de _malware_. Essa coleta de informações pode ser feita manualmente através da análise estática do arquivo em
-
-
 questão (enquanto ele descansa em disco) ou da análise dinâmica do mesmo (quando ele é executado e os códigos de operação são alocados em
 memória).
 
@@ -153,8 +151,7 @@ Esse é realmente o fundamental a se saber, porém mais detalhes de funcionament
 
 Existem diversas formas de utilizar essa ferramenta, como através do [projeto público do GitHub](https://github.com/VirusTotal/yara/releases) ou pela implementação de uma [aplicação terceira](https://github.com/VirusTotal/yara#whos-using-yara).
 Podemos também usá-la em diferentes momentos do ciclo de vida de uma análise, como na resposta ao incidente, no processo de _threat hunting_ ou na
-eliminação de falsos positivos. Estarei me atendo a aplicação dessa ferramenta dentro das possibilidades do escopo da Nelogica, que é composto
-atualmente apenas pelo nosso EDR, o Crowdstrike Falcon.
+eliminação de falsos positivos. Estarei me atendo a aplicação dessa ferramenta dentro de um escopo fechado, com o EDR líder de mercado Crowdstrike Falcon.
 
 ## Regras YARA no Falcon
 
@@ -182,5 +179,5 @@ pelo agente. Não encontrei documentação oficial sobre essa "limitação", som
 ## Conclusão
 
 
-A funcionalidade fornecida pelo MalQuery é avançada, apenas uma das ferramentas que compõe um processo complexo de resposta à incidentes.
-Precisamos do arroz com feijão bem feito em nossas organizações, um plano de resposta à incidentes maduro para, somente depois disso, usarmos da análise de malwares com regras YARA e gerar ações de bloqueio em larga escala.
+A funcionalidade fornecida pelo MalQuery é maravilhose e avançada, uma grande arma no arsenal de segurança defensiva. Entretanto é apenas isso, **uma das** ferramentas que compõe um processo complexo de resposta à incidentes.
+Precisamos do arroz com feijão bem feito em nossas organizações; um plano de resposta à incidentes maduro para, somente depois disso, usarmos da análise de malwares com regras YARA e gerar ações em larga escala.
