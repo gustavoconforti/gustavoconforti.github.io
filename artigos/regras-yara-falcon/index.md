@@ -119,7 +119,7 @@ demasia, e no fim das contas acabam ficando quase que exclusivamente nas mãos d
 
 Por esse motivo que, em novembro 2013, [Victor Alvarez](https://github.com/plusvic), então funcionário da [VirusTotal](https://www.virustotal.com/gui/home/url), criou...
 
-# YARA
+## YARA
 
 YARA (_Yet Another Ridiculous Acronym_ segundo Wikipedia) provê à profissionais indepentes e à grande comunidade, de forma aberta e totalmente
 grátis, uma ferramenta de catalogação e detecção de _malware_ baseada em regras, que analisam os padrões textuais ou binários (esses que acabamos
@@ -156,7 +156,7 @@ Podemos também usá-la em diferentes momentos do ciclo de vida de uma análise,
 eliminação de falsos positivos. Estarei me atendo a aplicação dessa ferramenta dentro das possibilidades do escopo da Nelogica, que é composto
 atualmente apenas pelo nosso EDR, o Crowdstrike Falcon.
 
-# Regras YARA no Falcon
+## Regras YARA no Falcon
 
 Novamente, as regas YARA podem fazer parte de diversas fases de um processo de análise de _malware_. Tendo estabelecidos os conceitos abordados
 anteriormente, o consumo das informações [deste vídeo](https://github.com/VirusTotal/yara#whos-using-yara) é suficiente para entender a utilização das regras YARA no Falcon, através da base [MalQuery](https://falcon.us-2.crowdstrike.com/login?next=%2Fdocumentation%2F18%2Ffalcon-malquery) (requer conta CrowdStrike).
