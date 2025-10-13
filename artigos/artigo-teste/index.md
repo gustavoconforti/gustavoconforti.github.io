@@ -1,9 +1,9 @@
 ---
 layout: default
+title: ""
 ---
 
-Analisando um Binário Fictício
----
+## Analisando um Binário Fictício
 <sup>[voltar](../../../)</sup>
 
 A análise de binários é uma prática comum em segurança da informação, engenharia reversa e depuração de software.  
