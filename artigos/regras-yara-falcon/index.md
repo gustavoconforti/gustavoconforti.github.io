@@ -179,5 +179,6 @@ pelo agente. Não encontrei documentação oficial sobre essa "limitação", som
 ## Conclusão
 
 
-A funcionalidade fornecida pelo MalQuery é maravilhose e avançada, uma grande arma no arsenal de segurança defensiva. Entretanto é apenas isso, **uma das** ferramentas que compõe um processo complexo de resposta à incidentes.
+A funcionalidade fornecida pelo MalQuery é maravilhosa e avançada, uma grande arma no arsenal de segurança defensiva. Entretanto, ela é apenas isso: **uma das** ferramentas que compõe um processo complexo de resposta à incidentes.
+
 Precisamos do arroz com feijão bem feito em nossas organizações; um plano de resposta à incidentes maduro para, somente depois disso, usarmos da análise de malwares com regras YARA e gerar ações em larga escala.
