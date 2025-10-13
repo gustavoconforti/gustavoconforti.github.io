@@ -1,4 +1,6 @@
-# Regras YARA no CrowdStrike Falcon (MalQuery)
+# Regras YARA e MalQuery: O papel de ferramentas em um processo de resposta a incidentes
+
+Este artigo explora o funcionamento de regras YARA e sua aplicação prática no Falcon MalQuery, destacando como essas ferramentas podem potencializar a análise de malwares em um processo de segurança defensiva.
 
 Para melhor compreender a função e o funcionamento das regras YARA, vale primeiro passar por alguns conceitos fundamentais em análise de
 _malwares_.
@@ -178,7 +180,6 @@ pelo agente. Não encontrei documentação oficial sobre essa "limitação", som
 
 ## Conclusão
 
+A funcionalidade fornecida pelo MalQuery é uma lindeza, maravilhosa, avançada, uma grande arma no arsenal de segurança defensiva. No entanto, ao escrever este material, permaneceu comigo a percepção de que ela é apenas isso: **uma das** várias ferramentas que compõe um processo complexo de resposta à incidentes.
 
-A funcionalidade fornecida pelo MalQuery é maravilhosa e avançada, uma grande arma no arsenal de segurança defensiva. Entretanto, ela é apenas isso: **uma das** ferramentas que compõe um processo complexo de resposta à incidentes.
-
-Precisamos do arroz com feijão bem feito em nossas organizações; um plano de resposta à incidentes maduro para, somente depois disso, usarmos da análise de malwares com regras YARA e gerar ações em larga escala.
+Para usufruir de tudo que ela tem a oferecer precisamos do "arroz com feijão" bem feito em nossas organizações; um plano de resposta à incidentes maduro para, somente depois disso, usarmos da análise de malwares com regras YARA e gerar ações em larga escala. Se tal fundação não existir, de nada adianta uma ferramenta tão robusta. Em outro artigo, compartilharei minha experiência prática na construção desses planos.
