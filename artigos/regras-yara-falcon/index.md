@@ -2,13 +2,12 @@
 
 Este artigo explora o funcionamento de regras YARA e sua aplicação prática no Falcon MalQuery, destacando como essas ferramentas podem potencializar a análise de malwares em um processo de segurança defensiva.
 
-Para melhor compreender a função e o funcionamento das regras YARA, vale primeiro passar por alguns conceitos fundamentais em análise de
-_malwares_.
+Para melhor compreender a função e o funcionamento das regras YARA, vale primeiro passar por alguns conceitos fundamentais em análise de _malwares_.
 
 ## Detecção baseada em _hashes_
 
 
-Uma das formas de catalogar arquivos em um computador é através de seu _hash_ , pois ele é único e exclusivo; cada arquivo possui um _hash_ singular,
+Uma das formas de catalogar arquivos em um computador é através de seu _hash_, pois ele é único e exclusivo; cada arquivo possui um _hash_ singular,
 dois arquivos diferentes não podem possuir o mesmo. Isso geralmente é feito utilizando mais de um algorítmo criptográfico, como MD5, SHA-1 e SHA-
 256, para evitar eventuais colisões.
 
@@ -16,11 +15,11 @@ dois arquivos diferentes não podem possuir o mesmo. Isso geralmente é feito ut
 > [!NOTE]
 > **Complemento: Algorítmos criptográficos**
 >
-> Um algorítmo criptográfico (MD5, SHA-1, SHA-256, etc.) é a tradução para software de uma função criptográfica (a _hashing function_) baseada nos
+> Um algorítmo criptográfico (MD5, SHA-1, SHA-256, etc.) é a tradução para software de uma função criptográfica (_hashing function_) baseada nos
 princípios da aritmética modular. 
 >
 > O _hash_ (ou _message disgest_), por sua vez, é o resultado final de uma função criptográfica que, no nosso caso, ingere um determinado dado (uma
-string , um arquivo, etc.).
+string, um arquivo, etc.).
 >
 > ```
 > 📄 malware.exe → MD5 → 0b36236f11f81d5247f26d6b39b8380d
@@ -34,7 +33,7 @@ Em suma:
 - Sempre (idealmente) que a origem for a mesma, o _hash_  será o mesmo
 - Chamamos de "colisão" quando duas origens diferentes geram um mesmo _hash_;  algorítmos que possibilitam esse erro são considerados
 falhos
-- O _hash_ tem sempre o mesmo comprimento, não importa o tamanho da informação que entra
+- O _hash_ tem sempre o mesmo comprimento, não importa o tamanho da informação inserida
 - Qualquer alteração mínima na origem gera um _hash_  completamente diferente
 - É impossível deduzir a informação original através da engenharia reversa de um  _hash_, somente através de força bruta (testar todas as origens
 possíveis até encontrar a correta)
@@ -54,7 +53,7 @@ As alterações supracitadas, porém, são meramente cosméticas; elas não alte
 função que nunca será utilizada, ou embaralhar a ordem de execução de partes do código. O que ele não pode fazer é alterar o endereço do servidor
 _C&C_ a ser contatado, ou o comando que será executado via PowerShell, pois nesses caso o programa não funcionaria.
 
-É aí que está o grande pulo do gato: essas (URLs, IPs, caminhos e comandos) são variáveis estáticas ou valores _hardcoded_ , que eventualmente precisam
+É aí que está o grande pulo do gato: essas (URLs, IPs, caminhos e comandos) são variáveis estáticas ou valores _hardcoded_, que eventualmente precisam
 ser alocados em memória. Pela simples natureza do processo, esses valores sobrevivem toda a esteira de compilação do código, sendo armazenados de
 forma inalterada em um segmento específico do binário final. 
 
@@ -90,7 +89,7 @@ forma inalterada em um segmento específico do binário final. 
 >db "Hello, World", 10 ← Valor hardcoded
 >```
 >3. Por fim, nas fases de _assembly_ e _linking_  o produto do passo anterior é transformado em linguagem binária pura e o arquivo final recebe _entry
->point_ , permitindo a sua execução. Esse é o executável que analisamos.
+>point_, permitindo a sua execução. Esse é o executável que analisamos.
 >
 >```
 >00000000 7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 |.ELF............|
@@ -105,10 +104,12 @@ forma inalterada em um segmento específico do binário final. 
 >[...]
 >```
 
+> [!IMPORTANT]
+> Se o arquivo possui funções de obfuscação mais avançadas (que simples codificação Base64, Hex etc.) ou foi empacotado, o processo pode ficar mais difícil e requerer passos de análise dinâmica.
 
 Mais sobre os assuntos em [What are EXE files?](https://www.youtube.com/watch?v=hhgxsrAFyz8&t=531s), [C and C++ compilation process](https://www.youtube.com/watch?v=ksJ9bdSX5Yo&t=2348s) e [Assembly: Hello World!](https://www.youtube.com/watch?v=HgEGAaYdABA&t=12s).
 
-Isso significa dizer que, por mais que o programador altere seu código a fim de burlar ferramentas defensivas baseadas em _hashes_ , a necessidade de
+Isso significa dizer que, por mais que o programador altere seu código a fim de burlar ferramentas defensivas baseadas em _hashes_, a necessidade de
 manter a funcionalidade do mesmo inevitavelmente gerará artefatos únicos de identificação, esses que poderemos eventualmente utilizar na
 catalogação de um determinado pedaço de _malware_. Essa coleta de informações pode ser feita manualmente através da análise estática do arquivo em
 questão (enquanto ele descansa em disco) ou da análise dinâmica do mesmo (quando ele é executado e os códigos de operação são alocados em
@@ -162,11 +163,11 @@ anteriormente, o consumo das informações [deste vídeo](https://github.com/Vir
 Em suma:
 
 
-- MalQuery é uma coleção gigantesca de arquivos maliciosos (na casa dos petabytes , ampliada a cada 8 horas) que vem sendo curada desde 2012 pela
+- MalQuery é uma coleção gigantesca de arquivos maliciosos (na casa dos petabytes, ampliada a cada 8 horas) que vem sendo curada desde 2012 pela
 CrowdStrike.
 - O incident responder consulta esse repositórios baseado em um incidente em execução/já ocorrido no ambiente local. Ele utiliza de padrões textuais,
 binários e/ou hexadecimais presentes nessa amostra encontrada para buscar mais informações sobre o malware em questão (se está ligado a algum
-threat actor , se faz parte de um família específica de malwares , quando foi identificado pela primeira vez, etc.).
+threat actor, se faz parte de um família específica de malwares, quando foi identificado pela primeira vez, etc.).
 - Com relação à regras YARA, a MalQuery funciona como uma base validadora de falsos positivos. Tendo uma regra já criada, baseada em um processo
 preestabelecido de análise de malware (retornaremos nesse ponto na conclusão), o investigador roda tal consulta YARA contra o MalQuery, a fim de
 projetar se ela será efetiva em um cenário real. Diferente de outras ferramentas de mercado que atendem o mesmo propósito, a MalQuery conta com
